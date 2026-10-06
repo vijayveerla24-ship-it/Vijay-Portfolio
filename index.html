@@ -1,715 +1,1340 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Portfolio of Vijay Sai Dattu, an Information Technology student and aspiring software developer.">
+    <title>Vijay Sai Dattu | Full Stack Developer</title>
 
-    <meta name="keywords"
-        content="Vijay Sai Dattu, Software Developer, Information Technology, Web Developer">
+    <meta name="description" content="Vijay Sai Dattu - Full Stack Developer and Information Technology student at Sasi Institute of Technology and Engineering.">
 
-    <meta name="author" content="Vijay Sai Dattu">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-    <title>Vijay Sai Dattu | Portfolio</title>
+        :root {
+            --background: #080c17;
+            --card: #111a2b;
+            --cyan: #00d9ff;
+            --blue: #4776ff;
+            --purple: #a15cff;
+            --white: #ffffff;
+            --text: #c5cddd;
+        }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        /* NAVIGATION */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 12, 23, 0.94);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+        }
+
+        nav {
+            max-width: 1150px;
+            margin: auto;
+            padding: 15px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            color: var(--cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--cyan);
+        }
+
+        .menu-toggle {
+            display: none;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* GENERAL SECTIONS */
+
+        section {
+            max-width: 1150px;
+            margin: auto;
+            padding: 90px 24px;
+            scroll-margin-top: 65px;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .section-heading span {
+            color: var(--cyan);
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(28px, 5vw, 38px);
+            margin-top: 8px;
+        }
+
+        .section-heading h2::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            margin: 12px auto 0;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+        }
+
+        /* HOME */
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+            animation: slideLeft 0.9s ease both;
+        }
+
+        .hero-label {
+            display: inline-block;
+            color: var(--cyan);
+            background: rgba(0, 217, 255, 0.08);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            padding: 6px 15px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(35px, 5vw, 58px);
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: var(--cyan);
+        }
+
+        .hero h2 {
+            color: #c3b4ff;
+            font-size: clamp(20px, 3vw, 28px);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--text);
+            max-width: 620px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 23px;
+            border: 1px solid var(--cyan);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(100deg, var(--blue), #8055e8);
+            border-color: transparent;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.2);
+        }
+
+        .btn-outline {
+            color: var(--cyan);
+        }
+
+        /* PROFILE PICTURE AFTER NAME AND DESCRIPTION */
+
+        .profile-wrapper {
+            width: 280px;
+            height: 280px;
+            flex-shrink: 0;
+            padding: 7px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cyan), var(--purple), var(--blue));
+            box-shadow: 0 0 35px rgba(0, 217, 255, 0.2);
+            animation: float 4s ease-in-out infinite, fadeIn 1.2s ease both;
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--background);
+            display: block;
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .about-text,
+        .info-card {
+            background: var(--card);
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+        }
+
+        .about-text p {
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .about-text strong {
+            color: var(--cyan);
+        }
+
+        .social-strip {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0 25px;
+        }
+
+        .social-strip > span {
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        .social-icon {
+            width: 43px;
+            height: 43px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            background: #202b40;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .social-icon img {
+            width: 23px;
+            height: 23px;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(0, 217, 255, 0.15);
+            border-color: var(--cyan);
+        }
+
+        .info-card h3 {
+            color: var(--cyan);
+            margin-bottom: 16px;
+        }
+
+        .info-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            display: block;
+            color: var(--white);
+        }
+
+        .info-item span {
+            color: var(--text);
+        }
+
+        /* SKILLS */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .skill-card {
+            background: linear-gradient(145deg, #141f34, #0e1524);
+            border: 1px solid rgba(0, 217, 255, 0.14);
+            padding: 26px 18px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            transition: left 0.4s;
+        }
+
+        .skill-card:hover::before {
+            left: 0;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 28px rgba(0, 217, 255, 0.1);
+        }
+
+        .skill-emoji {
+            font-size: 39px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .skill-card h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            margin-top: 13px;
+            padding: 4px 12px;
+            color: var(--cyan);
+            background: rgba(0, 217, 255, 0.08);
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* PROJECTS */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 28px;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--purple);
+            box-shadow: 0 12px 28px rgba(161, 92, 255, 0.12);
+        }
+
+        .project-emoji {
+            font-size: 35px;
+        }
+
+        .project-card h3 {
+            margin: 12px 0;
+            color: var(--cyan);
+        }
+
+        .project-card p {
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-stack span {
+            background: #202b40;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #d7e5ff;
+        }
+
+        /* EDUCATION */
+
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 16px;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background: linear-gradient(var(--cyan), var(--purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 28px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 7px;
+            top: 9px;
+            width: 20px;
+            height: 20px;
+            background: var(--cyan);
+            border: 4px solid var(--background);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(0, 217, 255, 0.5);
+        }
+
+        .timeline-content {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 23px;
+            transition: 0.3s;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--cyan);
+            transform: translateX(5px);
+        }
+
+        .timeline-content h3 {
+            color: var(--cyan);
+        }
+
+        .timeline-content p {
+            color: var(--text);
+        }
+
+        .year {
+            display: inline-block;
+            margin-top: 10px;
+            color: #d7c4ff;
+            background: rgba(161, 92, 255, 0.12);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        /* CONTACT */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            display: flex;
+            gap: 17px;
+            align-items: flex-start;
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 23px;
+            transition: 0.3s;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-5px);
+        }
+
+        .contact-emoji {
+            font-size: 28px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 5px;
+            color: var(--cyan);
+        }
+
+        .contact-card p,
+        .contact-card a {
+            color: var(--text);
+        }
+
+        .contact-card a:hover {
+            color: var(--cyan);
+        }
+
+        .contact-note {
+            text-align: center;
+            color: var(--text);
+            margin-top: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            text-align: center;
+            color: var(--text);
+        }
+
+        footer span {
+            color: var(--cyan);
+        }
+
+        #backToTop {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 46px;
+            height: 46px;
+            border: none;
+            border-radius: 50%;
+            color: #080c17;
+            background: var(--cyan);
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: 0.3s;
+            z-index: 900;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* SCROLL ANIMATIONS */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-9px); }
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 850px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 35px;
+                padding-top: 65px;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .profile-wrapper {
+                width: 230px;
+                height: 230px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                padding: 13px 18px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                padding: 10px 20px 20px;
+                background: #0c1220;
+                border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+            }
+
+            .nav-links.open {
+                display: flex;
+                animation: fadeIn 0.25s ease;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 11px 5px;
+            }
+
+            section {
+                padding: 70px 19px;
+            }
+
+            .projects-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .about-text,
+            .info-card,
+            .project-card {
+                padding: 21px;
+            }
+
+            .social-strip {
+                gap: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+#Logo {
+    color: var(--cyan);
+    text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+    </style>
 </head>
 
 <body>
 
-
-    <!-- =========================
-         NAVIGATION BAR
-    ========================== -->
-
+    <!-- NAVIGATION -->
     <header>
+        <nav>
+            <a href="#home" class="logo"><h1 id="Logo">PORTFOLIO</h1></a>
 
-        <nav class="navbar">
+            <button class="menu-toggle" id="menuToggle"
+                    aria-label="Open navigation"
+                    aria-expanded="false"
+                    aria-controls="navLinks">
+                ☰
+            </button>
 
-            <div class="logo">
-                PORTFOLIO
-            </div>
-
-            <ul class="nav-links">
-
-                <li>
-                    <a href="#home">&#127968Home</a>
-                </li>
-
-                <li>
-                    <a href="#about">&#128100About</a>
-                </li>
-
-                <li>
-                    <a href="#skills">&#127919Skills</a>
-                </li>
-
-                <li>
-                    <a href="#projects">&#128640Projects</a>
-                </li>
-
-                <li>
-                    <a href="#education">&#128218Education</a>
-                </li>
-
-                <li>
-                    <a href="#contact">&#128222Contact</a>
-                </li>
-
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#about">👤 About</a></li>
+                <li><a href="#skills">💻 Skills</a></li>
+                <li><a href="#projects">📚 Projects</a></li>
+                <li><a href="#education">🎓 Education</a></li>
+                <li><a href="#contact">📩 Contact</a></li>
             </ul>
-
         </nav>
-
     </header>
 
+    <main>
 
-
-    <!-- =========================
-         HOME SECTION
-    ========================== -->
-
-    <section id="home" class="hero">
-
-        <div class="hero-container">
-
-
-            <!-- Profile Photo -->
-
-            <div class="profile-wrapper">
-
-                <img src="profile.jpg.jpg"
-                    alt="Vijay Sai Dattu"
-                    class="profile-photo">
-
-            </div>
-
-
-            <!-- Hero Content -->
+        <!-- HOME -->
+        <section class="hero" id="home">
 
             <div class="hero-content">
+                <span class="hero-label">👋 Welcome to my portfolio</span>
 
-                <p class="welcome">
-                    WELCOME TO MY PORTFOLIO
+                <h1>Hi, I'm <span>Vijay Sai Dattu</span></h1>
+
+                <h2>Full Stack Developer & IT Student</h2>
+
+                <p>
+                    I am an Information Technology student passionate about
+                    building useful and user-friendly websites and applications.
+                    I work with front-end technologies to design attractive
+                    interfaces and back-end concepts to understand how
+                    applications work behind the scenes. I enjoy learning new
+                    technologies, solving problems, and turning ideas into
+                    practical projects. My goal is to grow as a developer and
+                    build reliable digital solutions.
                 </p>
-
-
-                <h1 class="vj">
-                    Hi, I'm
-                    <span>Vijay Sai Dattu</span>
-                </h1>
-
-
-                <h2>
-                    Information Technology Student
-                </h2>
-
-
-                <p class="hero-description">
-                    I am a B.Tech student passionate about software
-                    development, web technologies and building
-                    practical projects.
-                </p>
-
 
                 <div class="hero-buttons">
-
-                    <a href="#projects" class="btn">
-                        &#128640;View My Projects
+                    <a href="#projects" class="btn btn-primary">
+                        🚀 View My Projects
                     </a>
 
-                    <a href="#contact" class="btn secondary">
-                        &#128222;Contact Me
+                    <a href="#contact" class="btn btn-outline">
+                        📩 Contact Me
                     </a>
-
                 </div>
-
             </div>
 
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         ABOUT SECTION
-    ========================== -->
-
-    <section id="about" class="section">
-
-        <div class="section-title">
-
-            <p>
-                &#128100;GET TO KNOW ME
-            </p>
-
-            <h2>
-                About Me
-            </h2>
-
-        </div>
-
-
-        <div class="about-content">
-
-
-            <div class="about-text">
-
-                <h3>
-                    Hello! I'm Vijay 👋
-                </h3>
-
-
-                <p>
-                    I am a B.Tech Information Technology student
-                    at Sasi Institute of Technology and Engineering,
-                    currently pursuing my degree from 2024 to 2028.
-                </p>
-
-
-                <p>
-                    I am interested in software development and
-                    web technologies. I enjoy learning programming
-                    concepts and creating practical applications.
-                </p>
-
-
-                <p>
-                    My goal is to become a skilled software developer
-                    and build useful real-world applications.
-                </p>
-
+            <!-- Place profile.jpg.jpg in the SAME folder as index.html -->
+            <div class="profile-wrapper">
+                <img
+                    src="profile.jpg.jpg"
+                    alt="Profile photo of Vijay Sai Dattu"
+                    class="profile-photo"
+                >
             </div>
 
+        </section>
 
+        <!-- ABOUT -->
+        <section id="about">
 
-            <div class="about-card">
-
-
-                <div class="info">
-
-                    <strong>
-                        Education
-                    </strong>
-
-                    <span>
-                        B.Tech - Information Technology
-                    </span>
-
-                </div>
-
-
-
-                <div class="info">
-
-                    <strong>
-                        College
-                    </strong>
-
-                    <span>
-                        Sasi Institute of Technology and Engineering
-                    </span>
-
-                </div>
-
-
-
-                <div class="info">
-
-                    <strong>
-                        Duration
-                    </strong>
-
-                    <span>
-                        2024 - 2028
-                    </span>
-
-                </div>
-
-
+            <div class="section-heading">
+                <span>GET TO KNOW ME</span>
+                <h2>About Me</h2>
             </div>
 
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         SKILLS SECTION
-    ========================== -->
-
-    <section id="skills" class="section skills-section">
-
-        <div class="section-title">
-
-            <p>
-                &#127919;WHAT I KNOW
-            </p>
-
-            <h2>
-                My Skills
-            </h2>
-
-        </div>
-
-
-        <div class="skills-container">
-
-
-            <div class="skill-card">
-
-                <h3>
-                    HTML
-                </h3>
-
-                <p>
-                    Web Structure
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    CSS
-                </h3>
-
-                <p>
-                    Web Design
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    JavaScript
-                </h3>
-
-                <p>
-                    Web Development
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    Java
-                </h3>
-
-                <p>
-                    Programming
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    Python
-                </h3>
-
-                <p>
-                    Programming
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    C
-                </h3>
-
-                <p>
-                    Programming
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    Angular
-                </h3>
-
-                <p>
-                    Frontend Development
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    React
-                </h3>
-
-                <p>
-                    Frontend Development
-                </p>
-
-            </div>
-
-
-
-            <div class="skill-card">
-
-                <h3>
-                    Git
-                </h3>
-
-                <p>
-                    Version Control
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         PROJECTS SECTION
-    ========================== -->
-
-    <section id="projects" class="section">
-
-        <div class="section-title">
-
-            <p>
-                &#128640;MY WORK
-            </p>
-
-            <h2>
-                Projects
-            </h2>
-
-        </div>
-
-
-        <div class="projects-container">
-
-
-            <!-- Project 1 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    01
-                </div>
-
-                <h3>
-                    BMI Calculator
-                </h3>
-
-                <p>
-                    A web-based BMI calculator that calculates
-                    BMI using height and weight and displays
-                    the corresponding BMI category.
-                </p>
-
-                <span>
-                    HTML • CSS • JavaScript
-                </span>
-
-            </div>
-
-
-
-            <!-- Project 2 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    02
-                </div>
-
-                <h3>
-                    Student Result Calculator
-                </h3>
-
-                <p>
-                    A student result application that calculates
-                    marks, total, average and result status.
-                </p>
-
-                <span>
-                    HTML • CSS • JavaScript
-                </span>
-
-            </div>
-
-
-
-            <!-- Project 3 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    03
-                </div>
-
-                <h3>
-                    Cricket Squad Selection
-                </h3>
-
-                <p>
-                    A squad selection application that allows
-                    users to select players according to
-                    predefined cricket team rules.
-                </p>
-
-                <span>
-                    HTML • CSS • JavaScript
-                </span>
-
-            </div>
-
-
-
-            <!-- Project 4 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    04
-                </div>
-
-                <h3>
-                    Food Ordering Website
-                </h3>
-
-                <p>
-                    A frontend food ordering website with
-                    menu, navigation and food ordering
-                    interface.
-                </p>
-
-                <span>
-                    HTML • CSS • JavaScript
-                </span>
-
-            </div>
-
-
-
-            <!-- Project 5 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    05
-                </div>
-
-                <h3>
-                    FSDI Projects
-                </h3>
-
-                <p>
-                    A collection of frontend and web development
-                    projects created as part of my FSDI learning.
-                </p>
-
-                <span>
-                    HTML • CSS • JavaScript
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         EDUCATION SECTION
-    ========================== -->
-
-    <section id="education" class="section education-section">
-
-        <div class="section-title">
-
-            <p>
-                &#128218;MY ACADEMIC JOURNEY
-            </p>
-
-            <h2>
-                Education
-            </h2>
-
-        </div>
-
-
-        <div class="education-card">
-
-
-            <div class="education-year">
-                2024 - 2028
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Bachelor of Technology
-                </h3>
-
-                <h4>
-                    Information Technology
-                </h4>
-
-                <p>
-                    Sasi Institute of Technology and Engineering
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         CONTACT SECTION
-    ========================== -->
-
-    <section id="contact" class="section contact-section">
-
-        <div class="section-title">
-
-            <p>
-                &#128222;LET'S CONNECT
-            </p>
-
-            <h2>
-                Contact Me
-            </h2>
-
-        </div>
-
-
-        <div class="contact-content">
-
-
-            <p>
-                I'm always interested in learning, building
-                projects and connecting with other developers.
-            </p>
-
-
-            <a href="mailto:vijay.veerla24@sasi.ac.in"
-                class="email">
-
-                vijay.veerla24@sasi.ac.in
-
-            </a>
-
-
-            <div class="social-links">
-
-
-                <!-- GitHub -->
-
-                <a href="https://github.com/vijayveerla24-ship-it"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    GitHub
-
+            <!-- Social logos directly below GET TO KNOW ME / About heading -->
+            <div class="social-strip reveal">
+                <span>Connect with me:</span>
+
+                <a class="social-icon"
+                   href="https://github.com/vijayveerla24-ship-it"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="GitHub">
+                    <img src="https://cdn.simpleicons.org/github/FFFFFF"
+                         alt="GitHub">
                 </a>
 
-
-
-                <!-- LinkedIn -->
-
-                <a href="https://www.linkedin.com/in/vijay-veerla-10a244340/"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    LinkedIn
-
+                <a class="social-icon"
+                   href="https://www.linkedin.com/in/vijay-veerla-10a244340/"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+                    <img src="https://cdn.simpleicons.org/linkedin/0A66C2"
+                         alt="LinkedIn">
                 </a>
 
-
-
-                <!-- CodeChef -->
-
-                <a href="https://www.codechef.com/users/vijay_veerla05"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    CodeChef
-
+                <a class="social-icon"
+                   href="https://www.codechef.com/users/vijay_veerla05"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="CodeChef">
+                    <img src="https://cdn.simpleicons.org/codechef/FFFFFF"
+                         alt="CodeChef">
                 </a>
 
-
-
-                <!-- LeetCode -->
-
-                <a href="https://leetcode.com/u/n2xkuPdBf7/"
-                    target="_blank"
-                    rel="noopener noreferrer">
-
-                    LeetCode
-
+                <a class="social-icon"
+                   href="https://leetcode.com/u/n2xkuPdBf7/"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="LeetCode">
+                    <img src="https://cdn.simpleicons.org/leetcode/FFA116"
+                         alt="LeetCode">
                 </a>
+            </div>
 
+            <div class="about-grid">
+
+                <div class="about-text reveal">
+                    <p>
+                        Hello! I am <strong>Vijay Sai Dattu</strong>, an
+                        Information Technology student at Sasi Institute
+                        of Technology and Engineering.
+                    </p>
+
+                    <p>
+                        I am interested in <strong>full stack development</strong>,
+                        web design, programming, and software development.
+                        I enjoy creating projects that help me improve my
+                        technical knowledge and practical problem-solving skills.
+                    </p>
+
+                    <p>
+                        I am continuously improving my skills in HTML, CSS,
+                        JavaScript, Java, Python, and modern web technologies.
+                        I look forward to learning from real-world projects
+                        and contributing to a professional development team.
+                    </p>
+                </div>
+
+                <div class="info-card reveal">
+                    <h3>✨ Personal Information</h3>
+
+                    <div class="info-item">
+                        <strong>👨‍💻 Name</strong>
+                        <span>Vijay Sai Dattu</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🎯 Role</strong>
+                        <span>Full Stack Developer</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🎓 Branch</strong>
+                        <span>Information Technology</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>🏫 College</strong>
+                        <span>Sasi Institute of Technology and Engineering</span>
+                    </div>
+
+                    <div class="info-item">
+                        <strong>📅 B.Tech Duration</strong>
+                        <span>2024–2028</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+
+            <div class="section-heading">
+                <span>WHAT I WORK WITH</span>
+                <h2>My Skills</h2>
+            </div>
+
+            <div class="skills-grid">
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">🌐</span>
+                    <h3>HTML</h3>
+                    <p>Building the structure of web pages.</p>
+                    <span class="skill-tag">Web Structure</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">🎨</span>
+                    <h3>CSS</h3>
+                    <p>Designing responsive and attractive layouts.</p>
+                    <span class="skill-tag">Web Design</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">⚡</span>
+                    <h3>JavaScript</h3>
+                    <p>Adding interactivity and dynamic features.</p>
+                    <span class="skill-tag">Programming</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">☕</span>
+                    <h3>Java</h3>
+                    <p>Learning object-oriented programming.</p>
+                    <span class="skill-tag">OOP</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">🐍</span>
+                    <h3>Python</h3>
+                    <p>Writing programs and solving problems.</p>
+                    <span class="skill-tag">Programming</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">💻</span>
+                    <h3>C</h3>
+                    <p>Practising programming fundamentals.</p>
+                    <span class="skill-tag">Fundamentals</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">🅰️</span>
+                    <h3>Angular</h3>
+                    <p>Exploring component-based web applications.</p>
+                    <span class="skill-tag">Web Framework</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">⚛️</span>
+                    <h3>React</h3>
+                    <p>Exploring reusable user interface components.</p>
+                    <span class="skill-tag">UI Library</span>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">🌿</span>
+                    <h3>Git & GitHub</h3>
+                    <p>Managing code and tracking project changes.</p>
+                    <span class="skill-tag">Version Control</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+
+            <div class="section-heading">
+                <span>MY RECENT WORK</span>
+                <h2>My Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+
+                <article class="project-card reveal">
+                    <span class="project-emoji">🧮</span>
+                    <h3>BMI Calculator</h3>
+                    <p>
+                        A calculator that uses height and weight to calculate
+                        Body Mass Index and display the corresponding category.
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript / Flutter</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <span class="project-emoji">📊</span>
+                    <h3>Student Result Calculator</h3>
+                    <p>
+                        A student result application for entering marks,
+                        calculating totals, and displaying results.
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript / React</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <span class="project-emoji">🏏</span>
+                    <h3>Cricket Squad Selection</h3>
+                    <p>
+                        A project for selecting a cricket squad while following
+                        player limits and team-composition rules.
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <span class="project-emoji">🍔</span>
+                    <h3>Food Ordering Website</h3>
+                    <p>
+                        A website concept for displaying food items and
+                        providing a simple, user-friendly ordering interface.
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </article>
+
+                <article class="project-card reveal">
+                    <span class="project-emoji">🚀</span>
+                    <h3>FSDI Projects</h3>
+                    <p>
+                        Front-end development practice projects created
+                        to strengthen my website development skills.
+                    </p>
+                    <div class="tech-stack">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education">
+
+            <div class="section-heading">
+                <span>MY ACADEMIC JOURNEY</span>
+                <h2>Education</h2>
+            </div>
+
+            <div class="timeline">
+
+                <div class="timeline-item reveal">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <h3>🎓 B.Tech – Information Technology</h3>
+                        <p>Sasi Institute of Technology and Engineering</p>
+                        <p>Currently pursuing my undergraduate degree.</p>
+                        <span class="year">2024–2028</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <h3>📘 Intermediate</h3>
+                        <p>Sasi Junior College</p>
+                        <p>Completed my intermediate education.</p>
+                        <span class="year">2022–2024</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <span class="timeline-dot"></span>
+                    <div class="timeline-content">
+                        <h3>🏫 SSC</h3>
+                        <p>Vignan Public School</p>
+                        <p>Completed my secondary school education.</p>
+                        <span class="year">2021–2022</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+
+            <div class="section-heading">
+                <span>LET'S CONNECT</span>
+                <h2>Contact Me</h2>
+            </div>
+
+            <div class="contact-grid">
+
+                <div class="contact-card reveal">
+                    <span class="contact-emoji">📧</span>
+                    <div>
+                        <h3>Email</h3>
+                        <a href="mailto:vijay.veerla24@sasi.ac.in">
+                            vijay.veerla24@sasi.ac.in
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-card reveal">
+                    <span class="contact-emoji">📱</span>
+                    <div>
+                        <h3>Phone</h3>
+                        <a href="tel:7981180300">7981180300</a>
+                    </div>
+                </div>
+
+                <div class="contact-card reveal">
+                    <span class="contact-emoji">📍</span>
+                    <div>
+                        <h3>Address</h3>
+                        <p>Your city, Andhra Pradesh, India</p>
+                    </div>
+                </div>
+
+                <div class="contact-card reveal">
+                    <span class="contact-emoji">💼</span>
+                    <div>
+                        <h3>Professional Profiles</h3>
+                        <a href="https://github.com/vijayveerla24-ship-it"
+                           target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <span> · </span>
+                        <a href="https://www.linkedin.com/in/vijay-veerla-10a244340/"
+                           target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </div>
 
             </div>
 
-        </div>
+            <p class="contact-note">
+                Interested in working together or discussing a project?
+                Feel free to contact me!
+            </p>
 
-    </section>
+        </section>
 
+    </main>
 
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
+    <!-- FOOTER -->
     <footer>
-
         <p>
-            © 2026 Vijay Sai Dattu. All Rights Reserved.
+            Made with ❤️ by <span>Vijay Sai Dattu</span>
         </p>
-
+        <p>© <span id="currentYear">2026</span> All rights reserved.</p>
     </footer>
 
+    <button id="backToTop" aria-label="Back to top" title="Back to top">
+        ↑
+    </button>
 
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-    <!-- JavaScript -->
+            // Automatically update the copyright year
+            document.getElementById("currentYear").textContent =
+                new Date().getFullYear();
 
-    <script src="script.js"></script>
+            // Mobile navigation menu
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+
+            menuToggle.addEventListener("click", function () {
+                const isOpen = navLinks.classList.toggle("open");
+
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
+                menuToggle.setAttribute(
+                    "aria-label",
+                    isOpen ? "Close navigation" : "Open navigation"
+                );
+            });
+
+            // Close mobile menu after clicking a link
+            navLinks.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("open");
+                    menuToggle.textContent = "☰";
+                    menuToggle.setAttribute("aria-expanded", "false");
+                });
+            });
+
+            // Close the menu when Escape is pressed
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    navLinks.classList.remove("open");
+                    menuToggle.textContent = "☰";
+                    menuToggle.setAttribute("aria-expanded", "false");
+                }
+            });
+
+            // Reveal cards and sections when they enter the screen
+            const revealElements = document.querySelectorAll(".reveal");
+
+            if ("IntersectionObserver" in window) {
+                const revealObserver = new IntersectionObserver(
+                    function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("visible");
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.12,
+                        rootMargin: "0px 0px -25px 0px"
+                    }
+                );
+
+                revealElements.forEach(function (element) {
+                    revealObserver.observe(element);
+                });
+            } else {
+                revealElements.forEach(function (element) {
+                    element.classList.add("visible");
+                });
+            }
+
+            // Highlight the navigation link for the visible section
+            const sections = document.querySelectorAll("main section[id]");
+            const navigationLinks =
+                document.querySelectorAll(".nav-links a[href^='#']");
+
+            if ("IntersectionObserver" in window) {
+                const sectionObserver = new IntersectionObserver(
+                    function (entries) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                navigationLinks.forEach(function (link) {
+                                    const active =
+                                        link.getAttribute("href") ===
+                                        "#" + entry.target.id;
+
+                                    link.classList.toggle("active", active);
+
+                                    if (active) {
+                                        link.setAttribute(
+                                            "aria-current",
+                                            "location"
+                                        );
+                                    } else {
+                                        link.removeAttribute("aria-current");
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    {
+                        rootMargin: "-25% 0px -60% 0px"
+                    }
+                );
+
+                sections.forEach(function (section) {
+                    sectionObserver.observe(section);
+                });
+            }
+
+            // Back-to-top button
+            const backToTop = document.getElementById("backToTop");
+
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add("show");
+                } else {
+                    backToTop.classList.remove("show");
+                }
+            });
+
+            backToTop.addEventListener("click", function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+
+            // Button click animation
+            document.querySelectorAll(".btn, .social-icon").forEach(
+                function (element) {
+                    element.addEventListener("click", function () {
+                        element.animate(
+                            [
+                                { transform: "scale(1)" },
+                                { transform: "scale(0.94)" },
+                                { transform: "scale(1)" }
+                            ],
+                            {
+                                duration: 220,
+                                easing: "ease-out"
+                            }
+                        );
+                    });
+                }
+            );
+
+            console.log("Vijay Sai Dattu's portfolio loaded successfully!");
+        });
+    </script>
 
 </body>
-
 </html>
