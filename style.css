@@ -7,7 +7,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.logo {
+    font-size: 28px;
+    background: linear-gradient(90deg, #00d9ff, #0066ff, #7a2cff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
 html {
     scroll-behavior: smooth;
 }
